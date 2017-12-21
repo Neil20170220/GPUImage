@@ -56,7 +56,6 @@ static void *openGLESContextQueueKey;
         CFRelease(_coreVideoTextureCache);
         _coreVideoTextureCache = NULL;
     }
-    NSLog(@" %@ dealloc", self.class);
 }
 
 + (void *)contextKey {
