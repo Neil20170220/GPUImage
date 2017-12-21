@@ -58,7 +58,7 @@
 - (void)dealloc;
 {
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:memoryWarningObserver];
 #else
 #endif
 }
