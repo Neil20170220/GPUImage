@@ -507,7 +507,8 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
             {
                 //NSLog(@"video requestMediaDataWhenReadyOnQueue paused");
                 // if we don't sleep, we'll get called back almost immediately, chewing up CPU
-                usleep(10000);
+                //200 millisecond
+                usleep(200 * 1000);
                 return;
             }
             //NSLog(@"video requestMediaDataWhenReadyOnQueue begin");
