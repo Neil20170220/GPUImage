@@ -515,6 +515,9 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
 {
     if ( AVAssetReaderStatusReading == reader.status )
     {
+        if (CMTIME_IS_INVALID(processingFrameTime) || CMTIME_IS_INVALID(self.asset.duration)) {
+            return 0;
+        }
         float current = processingFrameTime.value * 1.0f / processingFrameTime.timescale;
         float duration = self.asset.duration.value * 1.0f / self.asset.duration.timescale;
         return current / duration;
