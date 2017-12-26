@@ -787,18 +787,7 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         }
         
         void(^write)() = ^() {
-            //death loop
-            CFTimeInterval currentTime = 0;
-            BOOL waitTimeout = NO;
             while( ! assetWriterVideoInput.readyForMoreMediaData && ! _encodingLiveVideo && ! videoEncodingIsFinished ) {
-                if (!currentTime) {
-                    currentTime = CACurrentMediaTime();
-                } else {
-                    if (CACurrentMediaTime() - currentTime >= 1.0) {
-                        waitTimeout = YES;
-                        break;
-                    }
-                }
                 NSDate *maxDate = [NSDate dateWithTimeIntervalSinceNow:0.1];
                 //            NSLog(@"video waiting...");
                 [[NSRunLoop currentRunLoop] runUntilDate:maxDate];
@@ -824,13 +813,6 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
             if (![GPUImageContext supportsFastTextureUpload])
             {
                 CVPixelBufferRelease(pixel_buffer);
-            }
-            
-            if (waitTimeout) {
-                [self cancelRecording];
-                if (self.failureBlock) {
-                    self.failureBlock(nil);
-                }
             }
         };
         
